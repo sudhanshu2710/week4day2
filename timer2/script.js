@@ -20,20 +20,18 @@ start.addEventListener("click", () => {
     hour = +input1.value;
     count++;
   }
-
-  console.log(`${hour}hour:${min}min:${sec}sec`);
   if (stopWatch) {
     const tick = () => {
       sec -= 1;
-      if (sec === 0) {
+      if (sec === 0 && min > 0) {
         min -= 1;
         sec = 60;
       }
-      if (min === 0) {
+      if (min === 0 && hour > 0) {
         hour -= 1;
         min = 60;
       }
-
+      if (sec == 0) clearInterval(setTimer);
       timerDisplay.textContent = `${hour}hour:${min}min:${sec}sec`;
     };
     setTimer = setInterval(tick, 1000);
@@ -53,4 +51,5 @@ reset.addEventListener("click", () => {
   clearInterval(setTimer);
   timerDisplay.textContent = `${hour}hour:${min}min:${sec}sec`;
   stopWatch = true;
+  count = 0;
 });
